@@ -1,4 +1,4 @@
-package com.app.pojos;
+package com.app.entity;
 
 public enum BloodGroup {
 	A_POSITIVE("A+"), A_NEGATIVE("A-"), B_POSITIVE("B+"), B_NEGATIVE("B-"), AB_POSITIVE("AB+"), AB_NEGATIVE("AB-"),

@@ -1,4 +1,4 @@
-package com.app.pojos;
+package com.app.entity;
 
 public class Admin extends BaseEntity {
 	private String adminName;
