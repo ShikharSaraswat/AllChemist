@@ -69,6 +69,11 @@ public class PatientD {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	@Override
+	public String toString() {
+		return "PatientD [id=" + id + ", password=" + password + "]";
+	}
 	
 	
 	

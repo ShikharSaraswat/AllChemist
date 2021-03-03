@@ -1,5 +1,8 @@
 package com.app.entity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Admin extends BaseEntity {
 	private String adminName;
 	private String password;
