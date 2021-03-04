@@ -15,9 +15,11 @@ public class PatientDao implements IPatientDao {
 	@Override
 	public PatientD updatePatientDetails(PatientD patient) {
 		// TODO Auto-generated method stub]
+		System.out.println("In updatePatientDetails");
 		PatientEntity pat = PatientEntity.toEntity(patient);
-		PatientEntity patUpdated = patientRepo.saveAndFlush(pat);
-		System.out.println(patUpdated);
+		System.out.println(pat+" "+pat.getId());
+		PatientEntity patUpdated = patientRepo.save(pat);
+		System.out.println(patUpdated+" "+patUpdated.getId());
 		return  patUpdated.toBean() ;
 	}
 	

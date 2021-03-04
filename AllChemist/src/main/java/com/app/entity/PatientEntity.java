@@ -24,7 +24,7 @@ public class PatientEntity extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private BloodGroup bloodGroup;
 	private String password;
-	@OneToMany(mappedBy = "patientId", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "patientId" , cascade = CascadeType.ALL ,  orphanRemoval = true)
 	private List<Prescription> history = new ArrayList<>();
 
 	// no args constructor
@@ -100,7 +100,7 @@ public class PatientEntity extends BaseEntity {
 	
 	public PatientD toBean() {
 		PatientD  patientDto = new PatientD();
-		BeanUtils.copyProperties(this, patientDto);
+		BeanUtils.copyProperties(this, patientDto,"history");
 		return patientDto;
 	}
 	

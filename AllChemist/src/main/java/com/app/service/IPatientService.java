@@ -19,5 +19,5 @@ public interface IPatientService {
 	 
 	 PatientD updateDetails(PatientD patient);
 	 
-	 PatientEntity updatePatientDetails(PatientD patient);
+	 PatientD updatePatientDetails(PatientD patient);
 }

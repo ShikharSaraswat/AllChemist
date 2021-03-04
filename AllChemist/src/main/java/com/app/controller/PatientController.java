@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,10 +42,22 @@ public class PatientController  {
 	}
 	
 	
-	@PostMapping("/update_details")
+//	@PutMapping("/update_details")
+//	public ResponseEntity<PatientD> updateDetails(@RequestBody PatientD person){
+//		System.out.println(person + "in controller");
+//		PatientD updatedPatient = patientService.updateDetails(person);
+//		if(updatedPatient!=null) {
+//			return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
+//			}else {
+//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//			}
+//		
+//	}
+	
+	@PutMapping("/update_details")
 	public ResponseEntity<PatientD> updateDetails(@RequestBody PatientD person){
-		System.out.println(person);
-		PatientD updatedPatient = patientService.updateDetails(person);
+		System.out.println(person + "in controller");
+		PatientD updatedPatient = patientService.updatePatientDetails(person);
 		if(updatedPatient!=null) {
 			return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
 			}else {
