@@ -54,15 +54,8 @@ public class PatientController  {
 //		
 //	}
 	
-	@PutMapping("/update_details")
-	public ResponseEntity<PatientD> updateDetails(@RequestBody PatientD person){
-		System.out.println(person + "in controller");
-		PatientD updatedPatient = patientService.updatePatientDetails(person);
-		if(updatedPatient!=null) {
-			return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
-			}else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}
+
+			
 		
-	}
+	
 }
