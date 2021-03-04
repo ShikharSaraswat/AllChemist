@@ -21,7 +21,7 @@ public class HospitalD {
 
 	
 	// for editing details
-	public HospitalD(String name, int id, String password) {
+	public HospitalD(int id, String password,String name) {
 		super();
 		this.name = name;
 		this.id = id;
