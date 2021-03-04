@@ -41,7 +41,8 @@ public class PatientService implements IPatientService {
 		System.out.println(patient.getId());
 		PatientEntity patientEntity = dao.findById(patient.getId()).get();
 		System.out.println(patientEntity+" existing Patient");
-		BeanUtils.copyProperties(patient, patientEntity);
+		patientEntity.setDetails(patient);
+//	BeanUtils.copyProperties(patient, patientEntity);
 		patientEntity = dao.save(patientEntity);
 		System.out.println(patientEntity);
 		return patientEntity.toBean();
@@ -55,6 +56,12 @@ public class PatientService implements IPatientService {
 		
 		return patientDao.updatePatientDetails(patient);
 		
+	}
+
+	@Override
+	public PatientEntity findPatientById(int id) {
+	
+		return dao.findById(id).get();
 	}
 
 }

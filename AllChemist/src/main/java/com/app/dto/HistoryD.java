@@ -26,7 +26,8 @@ public class HistoryD {
 		return prescriptions;
 	}
 
-	public void setAccounts(List<Prescription> prescriptions) {
+	public void setHistory(List<Prescription> prescriptions) {
 		this.prescriptions = prescriptions;
 	}
+	
 }

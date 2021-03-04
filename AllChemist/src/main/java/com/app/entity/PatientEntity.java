@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import org.springframework.beans.BeanUtils;
 
 import com.app.dto.PatientD;
+
 @Entity
 public class PatientEntity extends BaseEntity {
 	@Column(name = "patient_name", length = 50)
@@ -24,7 +25,7 @@ public class PatientEntity extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private BloodGroup bloodGroup;
 	private String password;
-	@OneToMany(mappedBy = "patientId" , cascade = CascadeType.ALL ,  orphanRemoval = true)
+	@OneToMany(mappedBy = "patientId" , cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Prescription> history = new ArrayList<>();
 
 	// no args constructor
@@ -97,17 +98,36 @@ public class PatientEntity extends BaseEntity {
 		return "Patient [name=" + name + ", dateOfBirth=" + dateOfBirth + ", address=" + address + ", bloodGroup="
 				+ bloodGroup + "]";
 	}
-	
+
 	public PatientD toBean() {
-		PatientD  patientDto = new PatientD();
-		BeanUtils.copyProperties(this, patientDto,"history");
+		PatientD patientDto = new PatientD();
+		BeanUtils.copyProperties(this, patientDto, "history");
 		return patientDto;
 	}
-	
-	public static PatientEntity toEntity(PatientD patient) { //field should be with same name
+
+	public static PatientEntity toEntity(PatientD patient) { // field should be with same name
 		PatientEntity pat = new PatientEntity();
-		BeanUtils.copyProperties(patient, pat,"history");
-		//patient.
+		BeanUtils.copyProperties(patient, pat, "history");
+		// patient.
 		return pat;
+	}
+
+	public PatientEntity setDetails(PatientD patient) {
+		if (patient.getName() != null) {
+			this.setName(patient.getName());
+		}
+		if (patient.getBloodGroup() != null) {
+			this.setBloodGroup(patient.getBloodGroup());
+		}
+		if (patient.getDateOfBirth() != null) {
+			this.setDateOfBirth(patient.getDateOfBirth());;
+		}
+		if (patient.getPassword() != null) {
+			this.setPassword(patient.getPassword());
+		}
+		if(patient.getAddress()!=null) {
+			this.setAddress(patient.getAddress());
+		}
+			return this;
 	}
 }

@@ -20,4 +20,6 @@ public interface IPatientService {
 	 PatientD updateDetails(PatientD patient);
 	 
 	 PatientD updatePatientDetails(PatientD patient);
+	 
+	 PatientEntity findPatientById(int id);
 }
