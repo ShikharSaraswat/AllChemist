@@ -6,13 +6,18 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.app.entity.Patient;
+import com.app.dto.PatientD;
+import com.app.entity.PatientEntity;
 
 
 public interface IPatientService {
 	
-	 Optional<Patient> getPatientByIdAndPassword(int id, String password);
+	 Optional<PatientEntity> getPatientByIdAndPassword(int id, String password);
 	 
 //	 @Query("UPDATE TABLE patient p set p.address =:add where p.id=:id")
 //	Optional<Patient> setPatientDetails(@Param("id") int Id, @Param("add") String add);
+	 
+	 PatientD updateDetails(PatientD patient);
+	 
+	 PatientEntity updatePatientDetails(PatientD patient);
 }

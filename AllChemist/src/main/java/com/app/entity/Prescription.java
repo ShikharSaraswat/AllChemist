@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 public class Prescription extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name="patient",nullable = false)
-	private Patient patientId;
+	private PatientEntity patientId;
 	@Column(name = "issue_date")
 	private LocalDate date;
 	@Lob
@@ -47,10 +47,10 @@ public class Prescription extends BaseEntity {
 	public void setPrescriptionFile(byte[] prescriptionFile) {
 		this.prescriptionFile = prescriptionFile;
 	}
-	public Patient getPatientId() {
+	public PatientEntity getPatientId() {
 		return patientId;
 	}
-	public void setPatientId(Patient patientId) {
+	public void setPatientId(PatientEntity patientId) {
 		this.patientId = patientId;
 	}
 	public boolean isStatus() {

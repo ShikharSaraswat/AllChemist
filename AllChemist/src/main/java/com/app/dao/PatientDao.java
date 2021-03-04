@@ -1,21 +1,27 @@
 package com.app.dao;
 
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.app.entity.Patient;
+import com.app.dto.PatientD;
+import com.app.entity.PatientEntity;
+import com.app.repository.PatientRepo;
 
 @Repository
-public interface PatientDao extends JpaRepository<Patient, Integer> {
+public class PatientDao implements IPatientDao {
 
-	Optional<Patient> findByIdAndPassword(int id, String password);
+	@Autowired
+	private PatientRepo patientRepo;
+	@Override
+	public PatientD updatePatientDetails(PatientD patient) {
+		// TODO Auto-generated method stub]
+		PatientEntity pat = PatientEntity.toEntity(patient);
+		PatientEntity patUpdated = patientRepo.saveAndFlush(pat);
+		System.out.println(patUpdated);
+		return  patUpdated.toBean() ;
+	}
 	
-//	@Query("UPDATE patient p set p.address =:add where p.id=:id")
-//	Optional<Patient> setPatientDetails(@Param("id") int Id, @Param("add") String add);
+	
 	
 	
 }

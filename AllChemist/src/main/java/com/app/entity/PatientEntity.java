@@ -10,8 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
+
+import org.springframework.beans.BeanUtils;
+
+import com.app.dto.PatientD;
 @Entity
-public class Patient extends BaseEntity {
+public class PatientEntity extends BaseEntity {
 	@Column(name = "patient_name", length = 50)
 	private String name;
 	private LocalDate dateOfBirth;
@@ -24,12 +28,12 @@ public class Patient extends BaseEntity {
 	private List<Prescription> history = new ArrayList<>();
 
 	// no args constructor
-	public Patient() {
+	public PatientEntity() {
 		System.out.println("in patient constructor");
 	}
 
 	// constructor
-	public Patient(String name, LocalDate dateOfBirth, String address, BloodGroup bloodGroup,
+	public PatientEntity(String name, LocalDate dateOfBirth, String address, BloodGroup bloodGroup,
 			List<Prescription> history) {
 		super();
 		this.name = name;
@@ -93,5 +97,17 @@ public class Patient extends BaseEntity {
 		return "Patient [name=" + name + ", dateOfBirth=" + dateOfBirth + ", address=" + address + ", bloodGroup="
 				+ bloodGroup + "]";
 	}
-
+	
+	public PatientD toBean() {
+		PatientD  patientDto = new PatientD();
+		BeanUtils.copyProperties(this, patientDto);
+		return patientDto;
+	}
+	
+	public static PatientEntity toEntity(PatientD patient) { //field should be with same name
+		PatientEntity pat = new PatientEntity();
+		BeanUtils.copyProperties(patient, pat,"history");
+		//patient.
+		return pat;
+	}
 }

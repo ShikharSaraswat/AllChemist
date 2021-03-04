@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.PatientD;
-import com.app.entity.Patient;
+import com.app.entity.PatientEntity;
 import com.app.entity.Prescription;
 import com.app.service.IPatientService;
 
@@ -31,12 +31,25 @@ public class PatientController  {
 	public ResponseEntity<PatientD> postBody(@RequestBody PatientD person){
 		
 		System.out.println(person);
-		Patient patient = patientService.getPatientByIdAndPassword(person.getId(), person.getPassword()).get();
+		PatientEntity patient = patientService.getPatientByIdAndPassword(person.getId(), person.getPassword()).get();
 		if(patient!=null) {
 		PatientD pat = new PatientD(patient.getId(), patient.getPassword(), patient.getName(), patient.getBloodGroup(), patient.getAddress());
 		return new ResponseEntity<>(pat, HttpStatus.OK);
 		}else {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
+	}
+	
+	
+	@PostMapping("/update_details")
+	public ResponseEntity<PatientD> updateDetails(@RequestBody PatientD person){
+		System.out.println(person);
+		PatientD updatedPatient = patientService.updateDetails(person);
+		if(updatedPatient!=null) {
+			return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
+			}else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+		
 	}
 }
