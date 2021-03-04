@@ -1,6 +1,7 @@
 package com.app.entity;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import com.app.dto.PrescriptionDto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Prescription extends BaseEntity {
 	@ManyToOne
+	@JsonIgnoreProperties("history")
 	@JoinColumn(name="patient",nullable = false)
 	private PatientEntity patientId;
 	@Column(name = "issue_date")
@@ -25,6 +30,14 @@ public class Prescription extends BaseEntity {
 	public Prescription() {
 		System.out.println("in prescription");
 	}
+	
+	public Prescription(PrescriptionDto prescription) {
+		this.date=prescription.getDate();
+		this.prescriptionFile=prescription.getPrescriptionFile();
+		this.status=prescription.getStatus();
+		
+	}
+	
 	//constructor
 	public Prescription(LocalDate date, byte[] prescriptionFile) {
 		super();
@@ -58,6 +71,12 @@ public class Prescription extends BaseEntity {
 	}
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Prescription [" + ", date=" + date + ", prescriptionFile="
+				+ Arrays.toString(prescriptionFile) + ", status=" + status + "]";
 	}
 	
 	

@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import org.springframework.beans.BeanUtils;
 
 import com.app.dto.PatientD;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class PatientEntity extends BaseEntity {
@@ -25,6 +26,7 @@ public class PatientEntity extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private BloodGroup bloodGroup;
 	private String password;
+	@JsonIgnoreProperties("patientID")
 	@OneToMany(mappedBy = "patientId" , cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Prescription> history = new ArrayList<>();
 
@@ -81,6 +83,7 @@ public class PatientEntity extends BaseEntity {
 		return history;
 	}
 
+	
 	public void setHistory(List<Prescription> history) {
 		this.history = history;
 	}

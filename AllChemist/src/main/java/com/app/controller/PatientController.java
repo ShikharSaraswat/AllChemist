@@ -28,7 +28,7 @@ public class PatientController  {
 	      //  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
 	       // produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
 	        )
-	public ResponseEntity<PatientD> postBody(@RequestBody PatientD person){
+	public ResponseEntity<PatientD> authenticatePatient(@RequestBody PatientD person){
 		
 		System.out.println(person);
 		PatientEntity patient = patientService.getPatientByIdAndPassword(person.getId(), person.getPassword()).get();
