@@ -2,6 +2,8 @@ package com.app.entity;
 
 import javax.persistence.Entity;
 
+import com.app.dto.HospitalD;
+
 @Entity
 public class Hospital extends BaseEntity {
 	private String hospitalName;
@@ -48,5 +50,13 @@ public class Hospital extends BaseEntity {
 		return "Hospital [hospitalName=" + hospitalName + ", patientCount=" + patientCount + "]";
 	}
 	
+	public Hospital toBean(HospitalD hospital) {
+		this.hospitalName=hospital.getName();
+		this.password=hospital.getPassword();
+		this.setId(hospital.getId());
+		
+		return this;
+		
+	}
 	
 }

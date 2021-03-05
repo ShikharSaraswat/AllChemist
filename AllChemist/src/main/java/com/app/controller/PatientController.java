@@ -23,14 +23,15 @@ public class PatientController {
 	@Autowired
 	private IPatientService patientService;
 
-	@PostMapping(value = "/login"
+	@PostMapping(value="/login"
 	// consumes = {MediaType.APPLICATION_JSON_VALUE,
 	// MediaType.APPLICATION_XML_VALUE},
 	// produces = {MediaType.APPLICATION_JSON_VALUE,
 	// MediaType.APPLICATION_XML_VALUE}
 	)
-	public ResponseEntity<PatientD> postBody(@RequestBody PatientD person) {
 
+
+	public ResponseEntity<PatientD> authenticatePatient(@RequestBody PatientD person) {
 		System.out.println(person);
 		PatientEntity patient = patientService.getPatientByIdAndPassword(person.getId(), person.getPassword()).get();
 		if (patient != null) {
@@ -72,9 +73,15 @@ public class PatientController {
 		PatientEntity patient = patientService.findPatientById(id);
 		HistoryD history = new HistoryD();
 		history.setHistory(patient.getHistory());
+<<<<<<< HEAD
 
 		return ResponseEntity.ok(history);
 
+=======
+		
+			return ResponseEntity.ok(history);
+	
+>>>>>>> 7281554f3ac17fdb2ba0c5d7ffea11eab0540b17
 	}
 
 }

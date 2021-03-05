@@ -1,6 +1,5 @@
 package com.app.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,6 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.dto.HistoryD;
+import com.app.dto.PrescriptionDto;
 import com.app.entity.PatientEntity;
 import com.app.entity.Prescription;
 import com.app.repository.PatientRepo;
@@ -16,17 +17,35 @@ import com.app.repository.PatientRepo;
 public class HospitalServiceImpl implements IHospitalService {
 	@Autowired
 	private PatientRepo patientDao;
+	@Autowired
+	private PrescriptionService prescriptionService;
+	
 	@Override
-	public void createPrescription(int id) {
-		PatientEntity p =  patientDao.findById(id).get();
+	public void createPrescription(PrescriptionDto prescription) {
+		PatientEntity p =  patientDao.findById(prescription.getPatientId()).get();
 		System.out.println(p);
-		Prescription prescription = new Prescription(LocalDate.now(), null);
+		Prescription newPrescription = new Prescription(prescription);
+		newPrescription.setPatientId(p);
+		prescriptionService.savePrescription(newPrescription);
 		
-		List<Prescription> pres = p.getHistory();
-		pres.add(prescription);
+		
+		List<Prescription> pres = p.getHistory(); 
+		p.setHistory(pres);
 		pres.forEach(System.out::println);
 		patientDao.save(p);
 		
+	}
+	@Override
+	public List<Prescription> fetchHistory(int id) {
+		PatientEntity patient = patientDao.findById(id).get();
+		HistoryD history = new HistoryD(patient.getHistory());
+		System.out.println(history.getHistory());
+		return history.getHistory();
+	}
+	@Override
+	public PatientEntity createPatient(PatientEntity patient) {
+		
+		return patientDao.save(patient); 
 	}
 
 }

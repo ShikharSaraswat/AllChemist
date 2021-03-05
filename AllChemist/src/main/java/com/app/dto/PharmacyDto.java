@@ -4,6 +4,7 @@ package com.app.dto;
 
 public class PharmacyDto {
 		
+	private int id;
 	private String pharmacyName;
 	private String licenseNumber;
 	private String password;
@@ -39,6 +40,14 @@ public class PharmacyDto {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

@@ -3,10 +3,13 @@ package com.app.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.app.dto.PharmacyDto;
+
 @Entity 
 public class Pharmacy {
 	private String pharmacyName;
 	@Id
+	private int id;
 	private String licenseNumber;
 	private String password;
 
@@ -45,13 +48,30 @@ public class Pharmacy {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	@Override
 	public String toString() {
 		return "Pharmacy [pharmacyName=" + pharmacyName + ", licenseNumber=" + licenseNumber + "]";
 	}
 
-
+	public Pharmacy toBean(PharmacyDto pharmacy) {
+		this.licenseNumber=pharmacy.getLicenseNumber();
+		this.password=pharmacy.getPassword();
+		this.pharmacyName=pharmacy.getPharmacyName();
+		this.id=pharmacy.getId();
+		
+		return this;
+	}
 	
 
 }

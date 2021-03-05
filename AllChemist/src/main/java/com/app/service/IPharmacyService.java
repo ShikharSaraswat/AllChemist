@@ -1,5 +1,10 @@
 package com.app.service;
 
-public interface IPharmacyService {
+import com.app.entity.Prescription;
 
+public interface IPharmacyService {
+	
+	Prescription checkPrescription(int id);
+	
+	String invalidatePrescription(int id);
 }
