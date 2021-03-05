@@ -18,29 +18,30 @@ import com.app.service.IPatientService;
 
 @RestController
 @RequestMapping("/patient")
-public class PatientController  {
-	
+public class PatientController {
+
 	@Autowired
 	private IPatientService patientService;
-	
-	@PostMapping(
-	        value = "/login"
-	      //  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-	       // produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-	        )
-	public ResponseEntity<PatientD> postBody(@RequestBody PatientD person){
-		
+
+	@PostMapping(value = "/login"
+	// consumes = {MediaType.APPLICATION_JSON_VALUE,
+	// MediaType.APPLICATION_XML_VALUE},
+	// produces = {MediaType.APPLICATION_JSON_VALUE,
+	// MediaType.APPLICATION_XML_VALUE}
+	)
+	public ResponseEntity<PatientD> postBody(@RequestBody PatientD person) {
+
 		System.out.println(person);
 		PatientEntity patient = patientService.getPatientByIdAndPassword(person.getId(), person.getPassword()).get();
-		if(patient!=null) {
-		PatientD pat = new PatientD(patient.getId(), patient.getPassword(), patient.getName(), patient.getBloodGroup(), patient.getAddress());
-		return new ResponseEntity<>(pat, HttpStatus.OK);
-		}else {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		if (patient != null) {
+			PatientD pat = new PatientD(patient.getId(), patient.getPassword(), patient.getName(),
+					patient.getBloodGroup(), patient.getAddress());
+			return new ResponseEntity<>(pat, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 	}
-	
-	
+
 //	@PutMapping("/update_details")
 //	public ResponseEntity<PatientD> updateDetails(@RequestBody PatientD person){
 //		System.out.println(person + "in controller");
@@ -52,30 +53,28 @@ public class PatientController  {
 //			}
 //		
 //	}
-	
+
 	@SuppressWarnings("unchecked")
 	@PutMapping("/update_details")
-	public ResponseEntity<PatientD> updateDetails(@RequestBody PatientD person){
+	public ResponseEntity<PatientD> updateDetails(@RequestBody PatientD person) {
 		System.out.println(person + "in controller");
 		PatientD p = patientService.updatePatientDetails(person);
-			if(p!=null) {
-				return ResponseEntity.ok(p);
-			}else {
-				return (ResponseEntity<PatientD>) ResponseEntity.notFound();
-			}
-			
-			
+		if (p != null) {
+			return ResponseEntity.ok(p);
+		} else {
+			return (ResponseEntity<PatientD>) ResponseEntity.notFound();
+		}
+
 	}
-	
+
 	@GetMapping("/history/{id}")
-	public ResponseEntity<HistoryD> getPatientHistory(@PathVariable int id){
+	public ResponseEntity<HistoryD> getPatientHistory(@PathVariable int id) {
 		PatientEntity patient = patientService.findPatientById(id);
 		HistoryD history = new HistoryD();
 		history.setHistory(patient.getHistory());
-		
-			return ResponseEntity.ok(history);
-	
-		
+
+		return ResponseEntity.ok(history);
+
 	}
-	
+
 }
