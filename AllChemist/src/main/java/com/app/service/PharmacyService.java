@@ -7,15 +7,21 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.dto.PharmacyDto;
 import com.app.entity.PatientEntity;
+import com.app.entity.Pharmacy;
 import com.app.entity.Prescription;
 import com.app.repository.PatientRepo;
+import com.app.repository.PharmacyDao;
 @Service
 @Transactional
 public class PharmacyService implements IPharmacyService {
 
 	@Autowired
-	PatientRepo patientDao;
+	private PatientRepo patientDao;
+	
+	@Autowired
+	private PharmacyDao pharmacyDao;
 
 	@Override
 	public Prescription checkPrescription(int id) {
@@ -42,6 +48,14 @@ public class PharmacyService implements IPharmacyService {
 			else {
 				return "Prescription Already Invalidated";
 			}
+	}
+
+	@Override
+	public Pharmacy updatePharmacyDetails(PharmacyDto pharmacy) {
+		
+		Pharmacy updatedPharmacy = new Pharmacy();
+		updatedPharmacy.toBean(pharmacy);
+		return pharmacyDao.save(updatedPharmacy);
 	}
 	
 	
