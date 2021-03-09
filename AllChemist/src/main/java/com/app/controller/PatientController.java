@@ -73,15 +73,13 @@ public class PatientController {
 		PatientEntity patient = patientService.findPatientById(id);
 		HistoryD history = new HistoryD();
 		history.setHistory(patient.getHistory());
-<<<<<<< HEAD
+
 
 		return ResponseEntity.ok(history);
 
-=======
+
 		
-			return ResponseEntity.ok(history);
-	
->>>>>>> 7281554f3ac17fdb2ba0c5d7ffea11eab0540b17
+
 	}
 
 }

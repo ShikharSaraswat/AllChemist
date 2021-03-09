@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.app.dto.PatientD;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class PatientEntity extends BaseEntity {
 	@Column(name = "patient_name", length = 50)
 	private String name;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
 	@Column(name = "address", length = 150)
 	private String address;
