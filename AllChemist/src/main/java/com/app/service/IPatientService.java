@@ -12,7 +12,7 @@ import com.app.entity.PatientEntity;
 
 public interface IPatientService {
 	
-	 Optional<PatientEntity> getPatientByIdAndPassword(int id, String password);
+	 PatientEntity getPatientByIdAndPassword(int id, String password);
 	 
 //	 @Query("UPDATE TABLE patient p set p.address =:add where p.id=:id")
 //	Optional<Patient> setPatientDetails(@Param("id") int Id, @Param("add") String add);

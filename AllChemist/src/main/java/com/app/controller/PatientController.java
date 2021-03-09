@@ -33,7 +33,7 @@ public class PatientController {
 
 	public ResponseEntity<PatientD> authenticatePatient(@RequestBody PatientD person) {
 		System.out.println(person);
-		PatientEntity patient = patientService.getPatientByIdAndPassword(person.getId(), person.getPassword()).get();
+		PatientEntity patient = patientService.getPatientByIdAndPassword(person.getId(), person.getPassword());
 		if (patient != null) {
 			PatientD pat = new PatientD(patient.getId(), patient.getPassword(), patient.getName(),
 					patient.getBloodGroup(), patient.getAddress());

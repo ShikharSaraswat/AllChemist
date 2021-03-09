@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.custom_exceptions.PatientDetailsHandlingException;
 import com.app.dao.IPatientDao;
 import com.app.dto.PatientD;
 import com.app.entity.PatientEntity;
@@ -26,8 +27,10 @@ public class PatientService implements IPatientService {
 	
 	
 	@Override
-	public Optional<PatientEntity> getPatientByIdAndPassword(int id, String password) {
-		return dao.findByIdAndPassword(id,password);
+	public PatientEntity getPatientByIdAndPassword(int id, String password) {
+		
+		Optional<PatientEntity> opt = dao.findByIdAndPassword(id,password);
+		return opt.orElseThrow(() -> new PatientDetailsHandlingException("Invalid Credentials"));
 	}
 
 //	@Override
