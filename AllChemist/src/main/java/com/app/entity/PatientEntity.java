@@ -20,6 +20,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class PatientEntity extends BaseEntity {
 	@Column(name = "patient_name", length = 50)
 	private String name;
+	@Column(name = "patient_email", length = 50)
+	private String email;
+	private float height;
+	private float weight;
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
 	private LocalDate dateOfBirth;
 	@Column(name = "address", length = 150)
 	private String address;
@@ -53,6 +59,38 @@ public class PatientEntity extends BaseEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public float getHeight() {
+		return height;
+	}
+
+	public void setHeight(float height) {
+		this.height = height;
+	}
+
+	public float getWeight() {
+		return weight;
+	}
+
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	public LocalDate getDateOfBirth() {
@@ -111,7 +149,6 @@ public class PatientEntity extends BaseEntity {
 	public static PatientEntity toEntity(PatientD patient) { // field should be with same name
 		PatientEntity pat = new PatientEntity();
 		BeanUtils.copyProperties(patient, pat, "history");
-		// patient.
 		return pat;
 	}
 
@@ -130,6 +167,18 @@ public class PatientEntity extends BaseEntity {
 		}
 		if(patient.getAddress()!=null) {
 			this.setAddress(patient.getAddress());
+		}
+		if(patient.getGender()!=null) {
+			this.setGender(patient.getGender());
+		}
+		if(patient.getEmail()!=null) {
+			this.setEmail(patient.getEmail());
+		}
+		if(patient.getHeight()!= null) {
+			this.setHeight(Float.parseFloat(patient.getHeight()));
+		}
+		if(patient.getWeight() != null) {
+			this.setWeight(Float.parseFloat(patient.getWeight()));
 		}
 			return this;
 	}
