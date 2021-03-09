@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dto.HistoryD;
+import com.app.dto.HospitalD;
 import com.app.dto.PrescriptionDto;
+import com.app.entity.Hospital;
 import com.app.entity.PatientEntity;
 import com.app.entity.Prescription;
+import com.app.repository.HospitalDao;
 import com.app.repository.PatientRepo;
 @Service
 @Transactional
@@ -19,6 +22,8 @@ public class HospitalServiceImpl implements IHospitalService {
 	private PatientRepo patientDao;
 	@Autowired
 	private PrescriptionService prescriptionService;
+	@Autowired
+	private HospitalDao hospitalDao;
 	
 	@Override
 	public void createPrescription(PrescriptionDto prescription) {
@@ -46,6 +51,13 @@ public class HospitalServiceImpl implements IHospitalService {
 	public PatientEntity createPatient(PatientEntity patient) {
 		
 		return patientDao.save(patient); 
+	}
+	@Override
+	public Hospital updateHospitalDetails(HospitalD hospital) {
+		Hospital newHospital= new Hospital();
+		newHospital.toBean(hospital);
+		
+		return hospitalDao.save(newHospital);
 	}
 
 }

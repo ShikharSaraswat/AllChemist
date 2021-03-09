@@ -7,12 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.HospitalD;
 import com.app.dto.PatientD;
 import com.app.dto.PrescriptionDto;
+import com.app.entity.Hospital;
 import com.app.entity.PatientEntity;
 import com.app.entity.Prescription;
 import com.app.service.IHospitalService;
@@ -44,5 +47,12 @@ public class HospitalController {
 		 
 		
 		return ResponseEntity.ok(hospitalService.createPatient(newPatient));
+	}
+	
+	@PutMapping("/update_details")
+	public ResponseEntity<Hospital> updateHospitalDetails(@RequestBody HospitalD hospital){
+		
+		Hospital updatedHospital=hospitalService.updateHospitalDetails(hospital);
+		return ResponseEntity.ok(updatedHospital);
 	}
 }
