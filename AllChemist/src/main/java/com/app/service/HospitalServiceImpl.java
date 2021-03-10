@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.PatientDetailsHandlingException;
@@ -31,8 +32,13 @@ import static com.app.security.services.UserDetailsImpl.build;
 public class HospitalServiceImpl implements IHospitalService {
 	@Autowired
 	private PatientRepo patientDao;
+	
+	@Autowired
+	PasswordEncoder encoder;
+	
 	@Autowired
 	private PrescriptionService prescriptionService;
+	
 	@Autowired
 	private HospitalDao hospitalDao;
 	
@@ -74,7 +80,7 @@ public class HospitalServiceImpl implements IHospitalService {
 		}
 		PatientEntity patientEntity = patientDao.save(patient); //persistent
 		Role role = roleDao.save(new Role(ERole.PATIENT)); //assigned role
-		User user = new User(patient.getName(), patient.getEmail(), patient.getPassword());
+		User user = new User( patient.getName(),patient.getEmail(), encoder.encode(patient.getPassword()));
 		user.getRoles().add(role);
 		
 		userDao.save(user);

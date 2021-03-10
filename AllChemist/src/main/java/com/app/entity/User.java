@@ -22,22 +22,23 @@ import org.springframework.boot.context.properties.bind.Name;
 @Entity
 @Table(	name = "users", 
 		uniqueConstraints = { 
-				@UniqueConstraint(columnNames = "username"),
+			@UniqueConstraint(columnNames = "username"), 	
 			@UniqueConstraint(columnNames = "email") 
 		})
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotBlank
-	@Size(max = 20)
-	private String username;	
+
 
 	@NotBlank
 	@Size(max = 50)
 	@Email
 	private String email;
+	
+	@NotBlank
+	@Size(max = 20)
+	private String username;
 
 	@NotBlank
 	@Size(max = 120)
@@ -54,8 +55,8 @@ public class User {
 	public User() {
 	}
 
-	public User( String username,String email, String password) {
-		this.username = username;
+	public User(String  username,String email, String password) {
+		this.username=username;
 		this.email = email;
 		this.password = password;
 	}
@@ -68,16 +69,17 @@ public class User {
 		this.id = id;
 	}
 
+
+	public String getEmail() {
+		return email;
+	}
+
 	public String getUsername() {
 		return username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getEmail() {
-		return email;
 	}
 
 	public void setEmail(String email) {

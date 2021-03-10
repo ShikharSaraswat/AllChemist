@@ -3,6 +3,7 @@ package com.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.app.service.IPatientService;
 
 @RestController
 @RequestMapping("/patient")
+@PreAuthorize("hasRole('PATIENT')")	
 public class PatientController {
 
 	@Autowired
@@ -30,7 +32,7 @@ public class PatientController {
 	// MediaType.APPLICATION_XML_VALUE}
 	)
 
-
+	//@PreAuthorize("hasRole('PATIENT')")		
 	public ResponseEntity<PatientD> authenticatePatient(@RequestBody PatientD person) {
 		System.out.println(person);
 		PatientEntity patient = patientService.getPatientByIdAndPassword(person.getId(), person.getPassword());
@@ -57,6 +59,7 @@ public class PatientController {
 
 	@SuppressWarnings("unchecked")
 	@PutMapping("/update_details")
+	//@PreAuthorize("hasRole('PATIENT')")	
 	public ResponseEntity<PatientD> updateDetails(@RequestBody PatientD person) {
 		System.out.println(person + "in controller");
 		PatientD p = patientService.updatePatientDetails(person);
@@ -69,6 +72,7 @@ public class PatientController {
 	}
 
 	@GetMapping("/history/{id}")
+	//@PreAuthorize("hasRole('PATIENT')")	
 	public ResponseEntity<HistoryD> getPatientHistory(@PathVariable int id) {
 		PatientEntity patient = patientService.findPatientById(id);
 		HistoryD history = new HistoryD();

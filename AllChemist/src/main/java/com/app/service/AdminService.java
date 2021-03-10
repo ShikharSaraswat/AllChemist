@@ -3,15 +3,21 @@ package com.app.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.AdminHandlingException;
 import com.app.dto.HospitalD;
 import com.app.dto.PharmacyDto;
+import com.app.entity.ERole;
 import com.app.entity.Hospital;
 import com.app.entity.Pharmacy;
+import com.app.entity.Role;
+import com.app.entity.User;
 import com.app.repository.HospitalDao;
 import com.app.repository.PharmacyDao;
+import com.app.repository.RoleRepository;
+import com.app.repository.UserRepository;
 
 @Service
 @Transactional
@@ -22,18 +28,36 @@ public class AdminService implements IAdminService {
 	
 	@Autowired
 	private PharmacyDao pharmacyDao;
+	
+	@Autowired
+	private RoleRepository roleDao;
+	
+	@Autowired 
+	private UserRepository userDao;
+	
+	@Autowired
+	PasswordEncoder encoder;
 
 	@Override
 	public Hospital registerHospital(HospitalD hospital) {
 		Hospital newHospital = new Hospital();
 		newHospital = newHospital.toBean(hospital);
-		return hospitalDao.save(newHospital);
+		Hospital hospitalPersistent = hospitalDao.save(newHospital);
+		Role role = roleDao.save(new Role(ERole.HOSPITAL));
+		User user = new User(hospital.getName()+""+hospitalPersistent.getId(), hospital.getEmail(), hospital.getPassword());
+		user.getRoles().add(role);
+		userDao.save(user);
+		return hospitalPersistent;
 	}
 
 	@Override
 	public Pharmacy registerPharmacy(PharmacyDto pharmacy) {
 		Pharmacy newPharmacy = new Pharmacy();
 		newPharmacy.toBean(pharmacy);
+		Role role = roleDao.save(new Role(ERole.HOSPITAL));
+		User user = new User(pharmacy.getPharmacyName(), pharmacy.getEmail(), pharmacy.getPassword());
+		user.getRoles().add(role);
+		userDao.save(user);
 		return pharmacyDao.save(newPharmacy);
 	}
 

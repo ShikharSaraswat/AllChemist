@@ -7,16 +7,18 @@ public class PharmacyDto {
 	private int id;
 	private String pharmacyName;
 	private String licenseNumber;
+	private String email;
 	private String password;
 	
 	//Default constr
 	public PharmacyDto() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	//Parameterized constr
-	public PharmacyDto(String pharmacyName, String licenseNumber, String password) {
+	public PharmacyDto(String pharmacyName,String email, String licenseNumber, String password) {
 		super();
+		this.email=email;
 		this.pharmacyName = pharmacyName;
 		this.licenseNumber = licenseNumber;
 		this.password = password;
@@ -49,6 +51,16 @@ public class PharmacyDto {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
 	
 	
 	

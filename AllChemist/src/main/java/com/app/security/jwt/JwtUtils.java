@@ -23,8 +23,10 @@ public class JwtUtils {
 	private int jwtExpirationMs;
 
 	public String generateJwtToken(Authentication authentication) {
-
+		
+		System.out.println("in jwt utils"+authentication.getPrincipal());
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+		System.out.println("in jwtUtils "+ userPrincipal.getUsername());
 
 		return Jwts.builder()
 				.setSubject((userPrincipal.getUsername()))
