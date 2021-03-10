@@ -29,7 +29,7 @@ public class HospitalController {
 	private IHospitalService hospitalService;
 	
 	@PostMapping("/create")
-	public ResponseEntity<Integer> createPrescription(@RequestBody PrescriptionDto prescription) {
+	public ResponseEntity<?> createPrescription(@RequestBody PrescriptionDto prescription) {
 		System.out.println(prescription.getPatientId());
 		hospitalService.createPrescription(prescription);
 		return ResponseEntity.ok(new Integer("123"));
@@ -42,7 +42,7 @@ public class HospitalController {
 	}
 	
 	@PostMapping("/create/patient")
-	public ResponseEntity<PatientEntity> createPatient(@RequestBody PatientD patient){
+	public ResponseEntity<?> createPatient(@RequestBody PatientD patient){
 		
 		  PatientEntity newPatient = new PatientEntity();
 		  newPatient.setDetails(patient);
@@ -52,7 +52,7 @@ public class HospitalController {
 	}
 	
 	@PutMapping("/update_details")
-	public ResponseEntity<Hospital> updateHospitalDetails(@RequestBody HospitalD hospital){
+	public ResponseEntity<?> updateHospitalDetails(@RequestBody HospitalD hospital){
 		
 		Hospital updatedHospital=hospitalService.updateHospitalDetails(hospital);
 		return ResponseEntity.ok(updatedHospital);

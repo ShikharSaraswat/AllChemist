@@ -44,7 +44,7 @@ public class AdminService implements IAdminService {
 		newHospital = newHospital.toBean(hospital);
 		Hospital hospitalPersistent = hospitalDao.save(newHospital);
 		Role role = roleDao.save(new Role(ERole.HOSPITAL));
-		User user = new User(hospital.getName()+""+hospitalPersistent.getId(), hospital.getEmail(), hospital.getPassword());
+		User user = new User(hospital.getName()+""+hospitalPersistent.getId(), hospital.getEmail(), encoder.encode(hospital.getPassword()));
 		user.getRoles().add(role);
 		userDao.save(user);
 		return hospitalPersistent;
@@ -55,7 +55,7 @@ public class AdminService implements IAdminService {
 		Pharmacy newPharmacy = new Pharmacy();
 		newPharmacy.toBean(pharmacy);
 		Role role = roleDao.save(new Role(ERole.HOSPITAL));
-		User user = new User(pharmacy.getPharmacyName(), pharmacy.getEmail(), pharmacy.getPassword());
+		User user = new User(pharmacy.getPharmacyName(), pharmacy.getEmail(), encoder.encode(pharmacy.getPassword()));
 		user.getRoles().add(role);
 		userDao.save(user);
 		return pharmacyDao.save(newPharmacy);
