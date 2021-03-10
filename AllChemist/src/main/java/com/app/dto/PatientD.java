@@ -4,31 +4,35 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.app.entity.BloodGroup;
+import com.app.entity.Gender;
 import com.app.entity.Prescription;
 
 public class PatientD {
-	
+
 	private int id;
 	private String password;
 	private String name;
+	private String email;
+	private String height;
+	private String weight;
+	private Gender gender;
 	private BloodGroup bloodGroup;
 	private String address;
 	private LocalDate dateOfBirth;
 
-	
-	//Default Constr
+	// Default Constr
 	public PatientD() {
-	
+
 	}
-	
-	//Parameterized Constr
+
+	// Parameterized Constr
 	public PatientD(int id, String password) {
 		super();
 		this.id = id;
 		this.password = password;
 	}
-	
-	//For Updating Details
+
+	// For Updating Details
 	public PatientD(int id, String password, String name, BloodGroup bloodGroup, String address) {
 		super();
 		this.id = id;
@@ -38,16 +42,19 @@ public class PatientD {
 		this.address = address;
 	}
 
-	//Getter and Setter
+	// Getter and Setter
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -58,6 +65,38 @@ public class PatientD {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	public BloodGroup getBloodGroup() {
@@ -84,15 +123,9 @@ public class PatientD {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	
-
 	@Override
 	public String toString() {
 		return "PatientD [id=" + id + ", password=" + password + "]";
 	}
-	
-	
-	
-	
-	
+
 }
