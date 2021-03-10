@@ -42,7 +42,7 @@ public class PatientService implements IPatientService {
 	public PatientD updatePatientDetails(PatientD patient) {
 		
 		System.out.println(patient.getId());
-		PatientEntity patientEntity = dao.findById(patient.getId()).get();
+		PatientEntity patientEntity = dao.findById(patient.getId()).orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
 		System.out.println(patientEntity+" existing Patient");
 		patientEntity.setDetails(patient);
 //	BeanUtils.copyProperties(patient, patientEntity);
@@ -56,15 +56,15 @@ public class PatientService implements IPatientService {
 	
 	public PatientD updateDetails(PatientD patient) {
 			
-		
-		return patientDao.updatePatientDetails(patient);
+		 PatientD patientDetails = patientDao.updatePatientDetails(patient);
+		return patientDetails;
 		
 	}
 
 	@Override
 	public PatientEntity findPatientById(int id) {
 	
-		return dao.findById(id).get();
+		return dao.findById(id).orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
 	}
 
 }

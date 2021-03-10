@@ -17,20 +17,22 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.boot.context.properties.bind.Name;
+
 @Entity
 @Table(	name = "users", 
 		uniqueConstraints = { 
-			@UniqueConstraint(columnNames = "username"),
+				@UniqueConstraint(columnNames = "username"),
 			@UniqueConstraint(columnNames = "email") 
 		})
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@NotBlank
 	@Size(max = 20)
-	private String username;
+	private String username;	
 
 	@NotBlank
 	@Size(max = 50)
@@ -47,10 +49,12 @@ public class User {
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
+
+
 	public User() {
 	}
 
-	public User(String username, String email, String password) {
+	public User( String username,String email, String password) {
 		this.username = username;
 		this.email = email;
 		this.password = password;

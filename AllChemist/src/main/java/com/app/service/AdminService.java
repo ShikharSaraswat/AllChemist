@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.custom_exceptions.AdminHandlingException;
 import com.app.dto.HospitalD;
 import com.app.dto.PharmacyDto;
 import com.app.entity.Hospital;
@@ -38,14 +39,14 @@ public class AdminService implements IAdminService {
 
 	@Override
 	public String removeHospital(int id) {
-		Hospital hospital = hospitalDao.findById(id).get();
+		Hospital hospital = hospitalDao.findById(id).orElseThrow(() -> new AdminHandlingException("Hospital with given id does not exist"));
 		hospitalDao.delete(hospital);
 		return "Hospital Removed";
 	}
 
 	@Override
 	public String removePharmacy(int id) {
-		Pharmacy pharmacy = pharmacyDao.findById(id).get();
+		Pharmacy pharmacy = pharmacyDao.findById(id).orElseThrow(() -> new AdminHandlingException("Pharmacy with given id does not exist"));
 		pharmacyDao.delete(pharmacy);
 		return "Pharmacy Removed";
 	}
