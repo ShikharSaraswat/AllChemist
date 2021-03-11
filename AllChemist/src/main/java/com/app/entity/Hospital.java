@@ -2,7 +2,7 @@ package com.app.entity;
 
 import javax.persistence.Entity;
 
-import com.app.dto.HospitalD;
+import com.app.dto.HospitalDto;
 
 @Entity
 public class Hospital extends BaseEntity {
@@ -62,7 +62,7 @@ public class Hospital extends BaseEntity {
 		return "Hospital [hospitalName=" + hospitalName + ", patientCount=" + patientCount + "]";
 	}
 	
-	public Hospital toBean(HospitalD hospital) {
+	public Hospital toBean(HospitalDto hospital) {
 		this.email=hospital.getEmail();
 		this.hospitalName=hospital.getName();
 		this.password=hospital.getPassword();

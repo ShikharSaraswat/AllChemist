@@ -1,13 +1,11 @@
 package com.app.dto;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import com.app.entity.BloodGroup;
 import com.app.entity.Gender;
-import com.app.entity.Prescription;
 
-public class PatientD {
+public class PatientDto {
 
 	private int id;
 	private String password;
@@ -21,26 +19,26 @@ public class PatientD {
 	private LocalDate dateOfBirth;
 
 	// Default Constr
-	public PatientD() {
+	public PatientDto() {
 
 	}
 
 	// Parameterized Constr
-	public PatientD(int id, String password) {
+	public PatientDto(int id, String password) {
 		super();
 		this.id = id;
 		this.password = password;
 	}
 
-	// For Updating Details
-	public PatientD(int id, String password, String name, BloodGroup bloodGroup, String address) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.bloodGroup = bloodGroup;
-		this.address = address;
-	}
+//	// For Updating Details
+//	public PatientD(int id, String password, String name, BloodGroup bloodGroup, String address) {
+//		super();
+//		this.id = id;
+//		this.password = password;
+//		this.name = name;
+//		this.bloodGroup = bloodGroup;
+//		this.address = address;
+//	}
 
 	// Getter and Setter
 	public int getId() {

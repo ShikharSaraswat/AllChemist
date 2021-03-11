@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.HospitalD;
-import com.app.dto.PatientD;
+import com.app.dto.HospitalDto;
+import com.app.dto.PatientDto;
 import com.app.dto.PrescriptionDto;
 import com.app.entity.Hospital;
 import com.app.entity.PatientEntity;
@@ -42,7 +41,7 @@ public class HospitalController {
 	}
 	
 	@PostMapping("/create/patient")
-	public ResponseEntity<?> createPatient(@RequestBody PatientD patient){
+	public ResponseEntity<?> createPatient(@RequestBody PatientDto patient){
 		
 		  PatientEntity newPatient = new PatientEntity();
 		  newPatient.setDetails(patient);
@@ -52,7 +51,7 @@ public class HospitalController {
 	}
 	
 	@PutMapping("/update_details")
-	public ResponseEntity<?> updateHospitalDetails(@RequestBody HospitalD hospital){
+	public ResponseEntity<?> updateHospitalDetails(@RequestBody HospitalDto hospital){
 		
 		Hospital updatedHospital=hospitalService.updateHospitalDetails(hospital);
 		return ResponseEntity.ok(updatedHospital);

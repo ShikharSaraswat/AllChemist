@@ -56,11 +56,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionManagement().
 				sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
 				authorizeRequests().
-				  antMatchers("/patient/**").permitAll().
-				  antMatchers("/hospital/**").permitAll().
-				  antMatchers("/pharmacy/**").permitAll().
-				  antMatchers("/admin/**").permitAll().
-				antMatchers("/**").permitAll().
+				  antMatchers("/patient/**").hasAuthority("PATIENT").
+			  antMatchers("/hospital/**").hasAuthority("HOSPITAL").
+			  antMatchers("/pharmacy/**").hasAuthority("PHARMACY").
+		  antMatchers("/admin/**").hasAuthority("ADMIN").
+			antMatchers("/**").permitAll().
 				anyRequest()
 				.authenticated();
 

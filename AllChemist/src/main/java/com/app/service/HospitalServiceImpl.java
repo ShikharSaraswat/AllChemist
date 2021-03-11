@@ -9,8 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.PatientDetailsHandlingException;
-import com.app.dto.HistoryD;
-import com.app.dto.HospitalD;
+import com.app.dto.HistoryDto;
+import com.app.dto.HospitalDto;
 import com.app.dto.PrescriptionDto;
 import com.app.entity.ERole;
 import com.app.entity.Hospital;
@@ -22,9 +22,6 @@ import com.app.repository.HospitalDao;
 import com.app.repository.PatientRepo;
 import com.app.repository.RoleRepository;
 import com.app.repository.UserRepository;
-import com.app.security.services.UserDetailsImpl;
-
-import static com.app.security.services.UserDetailsImpl.build;
 
 
 @Service
@@ -37,7 +34,7 @@ public class HospitalServiceImpl implements IHospitalService {
 	PasswordEncoder encoder;
 	
 	@Autowired
-	private PrescriptionService prescriptionService;
+	private PrescriptionServiceImpl prescriptionService;
 	
 	@Autowired
 	private HospitalDao hospitalDao;
@@ -57,10 +54,7 @@ public class HospitalServiceImpl implements IHospitalService {
 		newPrescription.setPatientId(p);
 		prescriptionService.savePrescription(newPrescription);
 
-		List<Prescription> pres = p.getHistory();
-		p.setHistory(pres);
-		pres.forEach(System.out::println); // to be removed later
-		patientDao.save(p);
+
 
 	}
 
@@ -68,7 +62,7 @@ public class HospitalServiceImpl implements IHospitalService {
 	public List<Prescription> fetchHistory(int id) {
 		PatientEntity patient = patientDao.findById(id)
 				.orElseThrow(() -> new PatientDetailsHandlingException("Patient id invalid"));
-		HistoryD history = new HistoryD(patient.getHistory());
+		HistoryDto history = new HistoryDto(patient.getHistory());
 		System.out.println(history.getHistory());
 		return history.getHistory();
 	}
@@ -88,7 +82,7 @@ public class HospitalServiceImpl implements IHospitalService {
 	}
 
 	@Override
-	public Hospital updateHospitalDetails(HospitalD hospital) {
+	public Hospital updateHospitalDetails(HospitalDto hospital) {
 		Hospital newHospital = new Hospital();
 		newHospital.toBean(hospital);
 

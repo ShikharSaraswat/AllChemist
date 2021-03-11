@@ -2,10 +2,6 @@ package com.app.dto;
 
 import java.time.LocalDate;
 
-
-
-import com.app.entity.PatientEntity;
-
 public class PrescriptionDto {
 	
 	private int id;

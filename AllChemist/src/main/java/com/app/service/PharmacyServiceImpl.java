@@ -17,7 +17,7 @@ import com.app.repository.PharmacyDao;
 
 @Service
 @Transactional
-public class PharmacyService implements IPharmacyService {
+public class PharmacyServiceImpl implements IPharmacyService {
 
 	@Autowired
 	private PatientRepo patientDao;
