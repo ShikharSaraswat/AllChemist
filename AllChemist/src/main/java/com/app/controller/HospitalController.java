@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.HospitalD;
-import com.app.dto.PatientD;
+import com.app.dto.HospitalDto;
+import com.app.dto.PatientDto;
 import com.app.dto.PrescriptionDto;
 import com.app.entity.Hospital;
 import com.app.entity.PatientEntity;
@@ -22,12 +22,13 @@ import com.app.service.IHospitalService;
 
 @RestController
 @RequestMapping("/hospital")
+
 public class HospitalController {
 	@Autowired
 	private IHospitalService hospitalService;
 	
 	@PostMapping("/create")
-	public ResponseEntity<Integer> createPrescription(@RequestBody PrescriptionDto prescription) {
+	public ResponseEntity<?> createPrescription(@RequestBody PrescriptionDto prescription) {
 		System.out.println(prescription.getPatientId());
 		hospitalService.createPrescription(prescription);
 		return ResponseEntity.ok(new Integer("123"));
@@ -40,7 +41,7 @@ public class HospitalController {
 	}
 	
 	@PostMapping("/create/patient")
-	public ResponseEntity<PatientEntity> createPatient(@RequestBody PatientD patient){
+	public ResponseEntity<?> createPatient(@RequestBody PatientDto patient){
 		
 		  PatientEntity newPatient = new PatientEntity();
 		  newPatient.setDetails(patient);
@@ -50,7 +51,7 @@ public class HospitalController {
 	}
 	
 	@PutMapping("/update_details")
-	public ResponseEntity<Hospital> updateHospitalDetails(@RequestBody HospitalD hospital){
+	public ResponseEntity<?> updateHospitalDetails(@RequestBody HospitalDto hospital){
 		
 		Hospital updatedHospital=hospitalService.updateHospitalDetails(hospital);
 		return ResponseEntity.ok(updatedHospital);

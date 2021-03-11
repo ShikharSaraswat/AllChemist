@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import javax.persistence.Id;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,8 +28,8 @@ public class UserDetailsImpl implements UserDetails {
 
 	public UserDetailsImpl(Long id, String username, String email, String password,
 			Collection<? extends GrantedAuthority> authorities) {
+		this.username=username;
 		this.id = id;
-		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
@@ -47,6 +45,7 @@ public class UserDetailsImpl implements UserDetails {
 				.collect(Collectors.toList());
 
 		return new UserDetailsImpl(
+				
 				user.getId(), 
 				user.getUsername(), 
 				user.getEmail(),
@@ -95,6 +94,14 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "UserDetailsImpl [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", authorities=" + authorities + "]";
 	}
 
 	@Override

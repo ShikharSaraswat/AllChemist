@@ -4,11 +4,28 @@ import javax.persistence.Entity;
 
 @Entity
 public class Admin extends BaseEntity {
+//	@Autowired
+//	UserRepository userDao;
+//	@Autowired
+//	RoleRepository roleDao;
+	
 	private String adminName;
 	private String password;
 	
 	public Admin() {
 		System.out.println("Admin constructor");
+		
+//		if(!userDao.existsByEmail("admin@admin.com")) {
+//			User admin = new User("admin", "admin@admin.com", "admin");
+//			Role role = new Role(ERole.ADMIN);
+//			roleDao.save(role);
+//			admin.getRoles().add(role);
+//			userDao.save(admin);
+//		}
+		
+		
+		
+		
 		
 	}
 

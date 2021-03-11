@@ -11,14 +11,16 @@ public class Pharmacy {
 	@Id
 	private int id;
 	private String licenseNumber;
+	private String email;
 	private String password;
 
 	public Pharmacy() {
 		System.out.println("in pharmacy constructor");
 	}
 
-	public Pharmacy(String pharmacyName, String licenseNumber, String password) {
+	public Pharmacy(String pharmacyName,String email, String licenseNumber, String password) {
 		super();
+		this.email=email;
 		this.pharmacyName = pharmacyName;
 		this.licenseNumber = licenseNumber;
 		this.password = password;
@@ -51,6 +53,14 @@ public class Pharmacy {
 	
 	
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void getEmail(String email) {
+		this.email = email;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -65,6 +75,7 @@ public class Pharmacy {
 	}
 
 	public Pharmacy toBean(PharmacyDto pharmacy) {
+		this.email=pharmacy.getEmail();
 		this.licenseNumber=pharmacy.getLicenseNumber();
 		this.password=pharmacy.getPassword();
 		this.pharmacyName=pharmacy.getPharmacyName();

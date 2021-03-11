@@ -4,25 +4,21 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.PatientDetailsHandlingException;
-import com.app.dao.IPatientDao;
-import com.app.dto.PatientD;
+import com.app.dto.PatientDto;
 import com.app.entity.PatientEntity;
 import com.app.repository.PatientRepo;
 
 @Service
 @Transactional
-public class PatientService implements IPatientService {
+public class PatientServiceImpl implements IPatientService {
 	
 	@Autowired 
 	PatientRepo dao;
-	
-	@Autowired
-	IPatientDao patientDao;
+
 	
 	
 	
@@ -39,7 +35,7 @@ public class PatientService implements IPatientService {
 //		return dao.setPatientDetails(Id, add);
 //	}
 	
-	public PatientD updatePatientDetails(PatientD patient) {
+	public PatientDto updatePatientDetails(PatientDto patient) {
 		
 		System.out.println(patient.getId());
 		PatientEntity patientEntity = dao.findById(patient.getId()).orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
@@ -54,12 +50,12 @@ public class PatientService implements IPatientService {
 		
 	}
 	
-	public PatientD updateDetails(PatientD patient) {
-			
-		 PatientD patientDetails = patientDao.updatePatientDetails(patient);
-		return patientDetails;
-		
-	}
+//	public PatientD updateDetails(PatientD patient) {
+//			
+//		 PatientD patientDetails = patientDao.updatePatientDetails(patient);
+//		return patientDetails;
+//		
+//	}
 
 	@Override
 	public PatientEntity findPatientById(int id) {

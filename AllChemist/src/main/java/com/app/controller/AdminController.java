@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.HospitalD;
+import com.app.dto.HospitalDto;
 import com.app.dto.PharmacyDto;
 import com.app.entity.Hospital;
 import com.app.entity.Pharmacy;
@@ -24,7 +24,7 @@ public class AdminController {
 	
 	
 	@PostMapping("/register_hospital")
-	public ResponseEntity<Hospital> registerHospital(@RequestBody HospitalD hospital){ // ResponseEntity<?> : why ??
+	public ResponseEntity<Hospital> registerHospital(@RequestBody HospitalDto hospital){ // ResponseEntity<?> : why ??
 		
 		return ResponseEntity.ok(adminService.registerHospital(hospital));
 	}

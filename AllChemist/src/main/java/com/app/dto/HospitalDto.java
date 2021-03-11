@@ -1,28 +1,31 @@
 package com.app.dto;
 
-public class HospitalD {
+public class HospitalDto {
 	
 	private String name;
 	private int id;
 	private String password;
+	private String email;
 	
 	//Default Constr
-	public HospitalD() {
+	public HospitalDto() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	
 	//Parameterized contr
-	public HospitalD(int id, String password) {
+	public HospitalDto(int id,String email, String password) {
 		super();
+		this.email=email;
 		this.id = id;
 		this.password = password;
 	}
 
 	
 	// for editing details
-	public HospitalD(int id, String password,String name) {
+	public HospitalDto(int id,String email, String password,String name) {
 		super();
+		this.email=email;
 		this.name = name;
 		this.id = id;
 		this.password = password;
@@ -50,4 +53,17 @@ public class HospitalD {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	
 }

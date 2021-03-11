@@ -9,7 +9,7 @@ import com.app.entity.Prescription;
 import com.app.repository.PrescriptionDao;
 @Service
 @Transactional
-public class PrescriptionService implements IPrescriptionService {
+public class PrescriptionServiceImpl implements IPrescriptionService {
 	
 	@Autowired
 	PrescriptionDao prescriptionDao;

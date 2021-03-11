@@ -2,7 +2,7 @@ package com.app.service;
 
 import java.util.List;
 
-import com.app.dto.HospitalD;
+import com.app.dto.HospitalDto;
 import com.app.dto.PrescriptionDto;
 import com.app.entity.Hospital;
 import com.app.entity.PatientEntity;
@@ -17,5 +17,5 @@ public interface IHospitalService {
 	
 	PatientEntity createPatient(PatientEntity patient);
 	
-	Hospital updateHospitalDetails(HospitalD hospital);
+	Hospital updateHospitalDetails(HospitalDto hospital);
 }

@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.app.dto.PatientD;
+import com.app.dto.PatientDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -144,19 +144,19 @@ public class PatientEntity extends BaseEntity {
 				+ bloodGroup + "]";
 	}
 
-	public PatientD toBean() {
-		PatientD patientDto = new PatientD();
+	public PatientDto toBean() {
+		PatientDto patientDto = new PatientDto();
 		BeanUtils.copyProperties(this, patientDto, "history");
 		return patientDto;
 	}
 
-	public static PatientEntity toEntity(PatientD patient) { // field should be with same name
+	public static PatientEntity toEntity(PatientDto patient) { // field should be with same name
 		PatientEntity pat = new PatientEntity();
 		BeanUtils.copyProperties(patient, pat, "history");
 		return pat;
 	}
 
-	public PatientEntity setDetails(PatientD patient) {
+	public PatientEntity setDetails(PatientDto patient) {
 		if (patient.getName() != null) {
 			this.setName(patient.getName());
 		}
