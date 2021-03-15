@@ -147,6 +147,8 @@ public class PatientEntity extends BaseEntity {
 	public PatientDto toBean() {
 		PatientDto patientDto = new PatientDto();
 		BeanUtils.copyProperties(this, patientDto, "history");
+		patientDto.setHeight(String.valueOf(this.height));
+		patientDto.setWeight(String.valueOf(this.weight));
 		return patientDto;
 	}
 

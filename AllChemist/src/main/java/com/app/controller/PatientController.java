@@ -1,7 +1,9 @@
 package com.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,7 +18,8 @@ import com.app.service.IPatientService;
 
 @RestController
 @RequestMapping("/patient")
-//@PreAuthorize("hasRole('PATIENT')")	
+//@PreAuthorize("hasRole('PATIENT')")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PatientController {
 
 	@Autowired
@@ -42,29 +45,28 @@ public class PatientController {
 //		}
 //	}
 
-//	@PutMapping("/update_details")
-//	public ResponseEntity<PatientD> updateDetails(@RequestBody PatientD person){
-//		System.out.println(person + "in controller");
-//		PatientD updatedPatient = patientService.updateDetails(person);
-//		if(updatedPatient!=null) {
-//			return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
-//			}else {
-//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//			}
-//		
-//	}
+	@GetMapping("/details/{id}")
+	public ResponseEntity<PatientDto> getDetails(@PathVariable int id){
+		PatientEntity patient = patientService.findPatientById(id);
+		PatientDto p = patient.toBean();
+		System.out.println(p);
+		//if(patient!=null) {
+			return ResponseEntity.ok(p);
+		
+		/*}else {
+			return  new ResponseEntity<>(HttpStatus.NO_CONTENT);  /// Resolve : how to handle this ?
+		}*/
+		
+	}
 
-	@SuppressWarnings("unchecked")
+	
 	@PutMapping("/update_details")
 	//@PreAuthorize("hasRole('PATIENT')")	
-	public ResponseEntity<PatientDto> updateDetails(@RequestBody PatientDto person) {
+	public ResponseEntity<?> updateDetails(@RequestBody PatientDto person) {
 		System.out.println(person + "in controller");
 		PatientDto p = patientService.updatePatientDetails(person);
-		if (p != null) {
-			return ResponseEntity.ok(p);
-		} else {
-			return (ResponseEntity<PatientDto>) ResponseEntity.notFound();
-		}
+		return ResponseEntity.ok(p);
+		
 
 	}
 

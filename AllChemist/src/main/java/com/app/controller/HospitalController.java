@@ -24,7 +24,7 @@ import com.app.service.IHospitalService;
 @CrossOrigin
 @RestController
 @RequestMapping("/hospital")
-
+@CrossOrigin(origins = "http://localhost:3000")
 public class HospitalController {
 	@Autowired
 	private IHospitalService hospitalService;

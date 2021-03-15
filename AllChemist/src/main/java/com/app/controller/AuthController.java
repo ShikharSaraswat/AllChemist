@@ -22,7 +22,7 @@ import com.app.payload.response.JwtResponse;
 import com.app.security.jwt.JwtUtils;
 import com.app.security.services.UserDetailsImpl;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AuthController {
 	@Autowired
@@ -54,7 +54,8 @@ public class AuthController {
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
-												 userDetails.getEmail(), 
+												 userDetails.getEmail(),
+												 userDetails.getRoleId(),
 												 roles));
 	}
 
