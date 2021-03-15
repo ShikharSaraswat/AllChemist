@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,6 +43,10 @@ public class User {
 	@NotBlank
 	@Size(max = 120)
 	private String password;
+	
+	
+	@Column(name = "role_id")
+	private int roleId;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
 	@JoinTable(	name = "user_roles", 
@@ -54,10 +59,11 @@ public class User {
 	public User() {
 	}
 
-	public User(String  username,String email, String password) {
+	public User(String  username,String email, String password ,int roleId) {
 		this.username=username;
 		this.email = email;
 		this.password = password;
+		this.roleId=roleId;
 	}
 
 	public Long getId() {
@@ -91,6 +97,15 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public Set<Role> getRoles() {

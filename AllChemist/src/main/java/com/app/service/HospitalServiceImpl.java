@@ -74,7 +74,7 @@ public class HospitalServiceImpl implements IHospitalService {
 		}
 		PatientEntity patientEntity = patientDao.save(patient); //persistent
 		Role role = roleDao.save(new Role(ERole.PATIENT)); //assigned role
-		User user = new User( patient.getName(),patient.getEmail(), encoder.encode(patient.getPassword()));
+		User user = new User( patient.getName(),patient.getEmail(), encoder.encode(patient.getPassword()),patientEntity.getId());
 		user.getRoles().add(role);
 		
 		userDao.save(user);

@@ -123,7 +123,11 @@ public class PatientDto {
 
 	@Override
 	public String toString() {
-		return "PatientD [id=" + id + ", password=" + password + "]";
+		return "PatientDto [id=" + id + ", password=" + password + ", name=" + name + ", email=" + email + ", height="
+				+ height + ", weight=" + weight + ", gender=" + gender + ", bloodGroup=" + bloodGroup + ", address="
+				+ address + ", dateOfBirth=" + dateOfBirth + "]";
 	}
+
+
 
 }

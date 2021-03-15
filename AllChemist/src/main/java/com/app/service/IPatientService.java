@@ -16,4 +16,6 @@ public interface IPatientService {
 	 PatientDto updatePatientDetails(PatientDto patient);
 	 
 	 PatientEntity findPatientById(int id);
+	 
+	// PatientEntity findByEmail(String email);
 }
