@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.PatientDetailsHandlingException;
+import com.app.dto.HistoryDto;
 import com.app.dto.PatientDto;
 import com.app.entity.PatientEntity;
+import com.app.entity.Prescription;
 import com.app.repository.PatientRepo;
 
 @Service
@@ -61,6 +64,15 @@ public class PatientServiceImpl implements IPatientService {
 	public PatientEntity findPatientById(int id) {
 	
 		return dao.findById(id).orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
+	}
+
+	@Override
+	public List<Prescription> fetchHistory(int id) {
+		PatientEntity patient = dao.findById(id).orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
+		System.out.println(patient.getHistory());
+		HistoryDto history = new HistoryDto(patient.getHistory());
+	
+		return history.getHistory();
 	}
 
 }

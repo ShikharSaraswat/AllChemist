@@ -1,7 +1,10 @@
 package com.app.service;
 
+import java.util.List;
+
 import com.app.dto.PatientDto;
 import com.app.entity.PatientEntity;
+import com.app.entity.Prescription;
 
 
 public interface IPatientService {
@@ -16,6 +19,8 @@ public interface IPatientService {
 	 PatientDto updatePatientDetails(PatientDto patient);
 	 
 	 PatientEntity findPatientById(int id);
+	 
+	 List<Prescription>  fetchHistory(int id);
 	 
 	// PatientEntity findByEmail(String email);
 }

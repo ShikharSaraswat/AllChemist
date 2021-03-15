@@ -70,7 +70,7 @@ public class HospitalServiceImpl implements IHospitalService {
 	@Override
 	public PatientEntity createPatient(PatientEntity patient) {
 		
-		//ce
+
 		if(patientDao.existsByEmail(patient.getEmail())) {
 			throw new PatientDetailsHandlingException("Patient with given email id already exists.");
 		}

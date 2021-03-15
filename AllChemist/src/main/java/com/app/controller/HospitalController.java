@@ -21,7 +21,7 @@ import com.app.entity.PatientEntity;
 import com.app.entity.Prescription;
 import com.app.service.IHospitalService;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/hospital")
 @CrossOrigin(origins = "http://localhost:3000")

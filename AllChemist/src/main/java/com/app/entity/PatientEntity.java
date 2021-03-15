@@ -38,7 +38,7 @@ public class PatientEntity extends BaseEntity {
 	private BloodGroup bloodGroup;
 	private String password;
 	@JsonIgnoreProperties("patientID")
-	@OneToMany(mappedBy = "patientId", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "patientId", cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Prescription> history = new ArrayList<>();
 
 	// no args constructor

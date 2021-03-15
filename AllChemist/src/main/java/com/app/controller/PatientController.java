@@ -1,7 +1,8 @@
 package com.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.HistoryDto;
 import com.app.dto.PatientDto;
 import com.app.entity.PatientEntity;
+import com.app.entity.Prescription;
 import com.app.service.IPatientService;
 
 @RestController
@@ -72,17 +73,13 @@ public class PatientController {
 
 	@GetMapping("/history/{id}")
 	//@PreAuthorize("hasRole('PATIENT')")	
-	public ResponseEntity<HistoryDto> getPatientHistory(@PathVariable int id) {
-		PatientEntity patient = patientService.findPatientById(id);
-		HistoryDto history = new HistoryDto();
-		history.setHistory(patient.getHistory());
-
-
-		return ResponseEntity.ok(history);
-
-
-		
-
+	public ResponseEntity<List<Prescription>> getPatientHistory(@PathVariable int id) {
+		/*
+		 * PatientEntity patient = patientService.findPatientById(id);
+		 * System.out.println(patient.getHistory()); //HistoryDto history = new
+		 * HistoryDto(patient.getHistory());
+		 */
+		return ResponseEntity.ok(patientService.fetchHistory(id));
 	}
 
 }
