@@ -59,7 +59,8 @@ public class AdminServiceImpl implements IAdminService {
 		Pharmacy newPharmacy = new Pharmacy();
 		newPharmacy.toBean(pharmacy);
 		Role role = roleDao.save(new Role(ERole.PHARMACY));
-		User user = new User(pharmacy.getPharmacyName(), pharmacy.getEmail(), encoder.encode(pharmacy.getPassword()),pharmacy.getId());
+		//User user = new User(pharmacy.getPharmacyName(), pharmacy.getEmail(), encoder.encode(pharmacy.getPassword()),pharmacy.getId());
+		User user = new User(pharmacy.getPharmacyName(), pharmacy.getEmail(), encoder.encode(pharmacy.getPassword()));
 		user.getRoles().add(role);
 		userDao.save(user);
 		return pharmacyDao.save(newPharmacy);

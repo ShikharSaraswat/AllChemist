@@ -1,6 +1,8 @@
-package com.app.entity;
+  package com.app.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.app.dto.PharmacyDto;
@@ -8,7 +10,8 @@ import com.app.dto.PharmacyDto;
 @Entity 
 public class Pharmacy {
 	private String pharmacyName;
-	@Id
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String licenseNumber;
 	private String email;
@@ -79,7 +82,7 @@ public class Pharmacy {
 		this.licenseNumber=pharmacy.getLicenseNumber();
 		this.password=pharmacy.getPassword();
 		this.pharmacyName=pharmacy.getPharmacyName();
-		this.id=pharmacy.getId();
+	//	this.id=pharmacy.getId();
 		
 		return this;
 	}
