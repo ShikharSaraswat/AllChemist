@@ -32,25 +32,25 @@ public class PharmacyServiceImpl implements IPharmacyService {
 				.orElseThrow(() -> new PharmacyDetailsHandlingException("Patient id invalid"));
 		List<Prescription> history = patient.getHistory();
 		List<Prescription> validPrescriptions = new ArrayList<>();
-		//Prescription p = history.get(history.size() - 1);
-		history.forEach((p)->{
+		// Prescription p = history.get(history.size() - 1);
+		history.forEach((p) -> {
 			if (p.isStatus() == true) {
 				validPrescriptions.add(p);
-			} 
+			}
 		});
 		return validPrescriptions;
-		
+
 	}
 
 	@Override
-	public String invalidatePrescription(int id,int imageId) {
+	public String invalidatePrescription(int id, int imageId) {
 		PatientEntity patient = patientDao.findById(id)
 				.orElseThrow(() -> new PharmacyDetailsHandlingException("Patient id invalid"));
 		List<Prescription> history = patient.getHistory();
-		
-		//Prescription p = history.get(history.size() - 1);
-		history.forEach((p)->{
-			if(p.getImageId()==imageId) {
+
+		// Prescription p = history.get(history.size() - 1);
+		history.forEach((p) -> {
+			if (p.getImageId() == imageId) {
 				p.setStatus(false);
 			}
 		});
@@ -65,11 +65,13 @@ public class PharmacyServiceImpl implements IPharmacyService {
 	}
 
 	@Override
-	public Pharmacy updatePharmacyDetails(PharmacyDto pharmacy) {
+	public PharmacyDto updatePharmacyDetails(PharmacyDto pharmacy) {
 
 		Pharmacy updatedPharmacy = new Pharmacy();
 		updatedPharmacy.toBean(pharmacy);
-		return pharmacyDao.save(updatedPharmacy);
+	Pharmacy savedPharmacy = pharmacyDao.save(updatedPharmacy);
+	return  savedPharmacy.toBeanDto();
+		
 	}
 
 }

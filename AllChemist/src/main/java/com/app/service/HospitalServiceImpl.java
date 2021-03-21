@@ -84,11 +84,13 @@ public class HospitalServiceImpl implements IHospitalService {
 	}
 
 	@Override
-	public Hospital updateHospitalDetails(HospitalDto hospital) {
+	public HospitalDto updateHospitalDetails(HospitalDto hospital) {
 		Hospital newHospital = new Hospital();
 		newHospital.toBean(hospital);
 
-		return hospitalDao.save(newHospital);
+		 Hospital savedHospital = hospitalDao.save(newHospital);
+		 return savedHospital.toBeanDto();
+		 
 	}
 
 }

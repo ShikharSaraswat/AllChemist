@@ -7,9 +7,9 @@ import com.app.entity.Pharmacy;
 
 public interface IAdminService {
 	
-	Hospital registerHospital(HospitalDto hospital);
+	HospitalDto registerHospital(HospitalDto hospital);
 	
-	Pharmacy registerPharmacy(PharmacyDto pharmacy);
+	PharmacyDto registerPharmacy(PharmacyDto pharmacy);
 	
 	String removeHospital(int id);
 	

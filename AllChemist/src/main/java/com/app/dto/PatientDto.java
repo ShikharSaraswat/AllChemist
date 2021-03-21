@@ -29,6 +29,7 @@ public class PatientDto {
 		this.id = id;
 		this.password = password;
 	}
+	
 
 //	// For Updating Details
 //	public PatientD(int id, String password, String name, BloodGroup bloodGroup, String address) {
@@ -39,6 +40,21 @@ public class PatientDto {
 //		this.bloodGroup = bloodGroup;
 //		this.address = address;
 //	}
+
+	public PatientDto(int id, String password, String name, String email, String height, String weight, Gender gender,
+			BloodGroup bloodGroup, String address, LocalDate dateOfBirth) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.height = height;
+		this.weight = weight;
+		this.gender = gender;
+		this.bloodGroup = bloodGroup;
+		this.address = address;
+		this.dateOfBirth = dateOfBirth;
+	}
 
 	// Getter and Setter
 	public int getId() {

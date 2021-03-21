@@ -12,5 +12,5 @@ public interface IPharmacyService {
 	
 	String invalidatePrescription(int id,int imageId);
 	
-	Pharmacy updatePharmacyDetails(PharmacyDto pharmacy);
+	PharmacyDto updatePharmacyDetails(PharmacyDto pharmacy);
 }
