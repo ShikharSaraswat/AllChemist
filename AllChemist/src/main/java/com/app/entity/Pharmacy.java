@@ -87,5 +87,11 @@ public class Pharmacy {
 		return this;
 	}
 	
+	public PharmacyDto toBeanDto() {
+		PharmacyDto p = new PharmacyDto(this.getPharmacyName(), this.getEmail(), this.getLicenseNumber(), this.getPassword());
+		return p;
+		
+	}
+	
 
 }

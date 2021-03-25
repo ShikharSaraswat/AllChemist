@@ -18,17 +18,14 @@ import com.app.repository.PatientRepo;
 @Service
 @Transactional
 public class PatientServiceImpl implements IPatientService {
-	
-	@Autowired 
+
+	@Autowired
 	PatientRepo dao;
 
-	
-	
-	
 	@Override
 	public PatientEntity getPatientByIdAndPassword(int id, String password) {
-		
-		Optional<PatientEntity> opt = dao.findByIdAndPassword(id,password);
+
+		Optional<PatientEntity> opt = dao.findByIdAndPassword(id, password);
 		return opt.orElseThrow(() -> new PatientDetailsHandlingException("Invalid Credentials"));
 	}
 
@@ -37,22 +34,21 @@ public class PatientServiceImpl implements IPatientService {
 //		
 //		return dao.setPatientDetails(Id, add);
 //	}
-	
+
 	public PatientDto updatePatientDetails(PatientDto patient) {
-		
+
 		System.out.println(patient.getId());
-		PatientEntity patientEntity = dao.findById(patient.getId()).orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
-		System.out.println(patientEntity+" existing Patient");
+		PatientEntity patientEntity = dao.findById(patient.getId())
+				.orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
+		System.out.println(patientEntity + " existing Patient");
 		patientEntity.setDetails(patient);
 //	BeanUtils.copyProperties(patient, patientEntity);
 		patientEntity = dao.save(patientEntity);
 		System.out.println(patientEntity);
 		return patientEntity.toBean();
-		
-		
-		
+
 	}
-	
+
 //	public PatientD updateDetails(PatientD patient) {
 //			
 //		 PatientD patientDetails = patientDao.updatePatientDetails(patient);
@@ -62,16 +58,18 @@ public class PatientServiceImpl implements IPatientService {
 
 	@Override
 	public PatientEntity findPatientById(int id) {
-	
-		return dao.findById(id).orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
+
+		return dao.findById(id)
+				.orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
 	}
 
 	@Override
 	public List<Prescription> fetchHistory(int id) {
-		PatientEntity patient = dao.findById(id).orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
+		PatientEntity patient = dao.findById(id)
+				.orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
 		System.out.println(patient.getHistory());
 		HistoryDto history = new HistoryDto(patient.getHistory());
-	
+
 		return history.getHistory();
 	}
 

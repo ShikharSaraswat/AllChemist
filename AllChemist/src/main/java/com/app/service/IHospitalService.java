@@ -17,5 +17,5 @@ public interface IHospitalService {
 	
 	PatientEntity createPatient(PatientEntity patient);
 	
-	Hospital updateHospitalDetails(HospitalDto hospital);
+	HospitalDto updateHospitalDetails(HospitalDto hospital);
 }

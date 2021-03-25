@@ -72,6 +72,11 @@ public class Hospital extends BaseEntity {
 		
 	}
 	
+	public HospitalDto toBeanDto() {
+		HospitalDto hd = new HospitalDto(this.getId(), this.getEmail(), this.getPassword(), this.getHospitalName());
+			return hd;
+	}
+	
 	
 	
 }

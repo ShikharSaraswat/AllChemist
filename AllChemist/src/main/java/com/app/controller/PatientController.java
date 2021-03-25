@@ -50,7 +50,7 @@ public class PatientController {
 	public ResponseEntity<PatientDto> getDetails(@PathVariable int id){
 		PatientEntity patient = patientService.findPatientById(id);
 		PatientDto p = patient.toBean();
-		System.out.println(p);
+	 //use logger instead of syso
 		//if(patient!=null) {
 			return ResponseEntity.ok(p);
 		

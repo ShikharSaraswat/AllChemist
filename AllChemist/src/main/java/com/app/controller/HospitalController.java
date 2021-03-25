@@ -55,7 +55,8 @@ public class HospitalController {
 	@PutMapping("/update_details")
 	public ResponseEntity<?> updateHospitalDetails(@RequestBody HospitalDto hospital){
 		
-		Hospital updatedHospital=hospitalService.updateHospitalDetails(hospital);
+		HospitalDto updatedHospital=hospitalService.updateHospitalDetails(hospital);
+		
 		return ResponseEntity.ok(updatedHospital);
 	}
 }

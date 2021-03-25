@@ -26,13 +26,13 @@ public class AdminController {
 	
 	
 	@PostMapping("/register_hospital")
-	public ResponseEntity<Hospital> registerHospital(@RequestBody HospitalDto hospital){ // ResponseEntity<?> : why ??
+	public ResponseEntity<HospitalDto> registerHospital(@RequestBody HospitalDto hospital){ // ResponseEntity<?> : why ??
 		
 		return ResponseEntity.ok(adminService.registerHospital(hospital));
 	}
 	
 	@PostMapping("/register_pharmacy")
-	public ResponseEntity<Pharmacy> registerPharmacy(@RequestBody PharmacyDto pharmacy){
+	public ResponseEntity<PharmacyDto> registerPharmacy(@RequestBody PharmacyDto pharmacy){
 		
 		return ResponseEntity.ok(adminService.registerPharmacy(pharmacy));
 	}

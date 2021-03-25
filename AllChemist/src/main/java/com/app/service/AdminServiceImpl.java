@@ -43,7 +43,7 @@ public class AdminServiceImpl implements IAdminService {
 	
 
 	@Override
-	public Hospital registerHospital(HospitalDto hospital) {
+	public HospitalDto registerHospital(HospitalDto hospital) {
 		Hospital newHospital = new Hospital();
 		newHospital = newHospital.toBean(hospital);
 		Hospital hospitalPersistent = hospitalDao.save(newHospital);
@@ -51,18 +51,20 @@ public class AdminServiceImpl implements IAdminService {
 		User user = new User(hospital.getName(), hospital.getEmail(), encoder.encode(hospital.getPassword()),hospital.getId());
 		user.getRoles().add(role);
 		userDao.save(user);
-		return hospitalPersistent;
+		
+		return hospitalPersistent.toBeanDto();
 	}
 
 	@Override
-	public Pharmacy registerPharmacy(PharmacyDto pharmacy) {
+	public PharmacyDto registerPharmacy(PharmacyDto pharmacy) {
 		Pharmacy newPharmacy = new Pharmacy();
 		newPharmacy.toBean(pharmacy);
 		Role role = roleDao.save(new Role(ERole.PHARMACY));
 		User user = new User(pharmacy.getPharmacyName(), pharmacy.getEmail(), encoder.encode(pharmacy.getPassword()),pharmacy.getId());
 		user.getRoles().add(role);
 		userDao.save(user);
-		return pharmacyDao.save(newPharmacy);
+		 Pharmacy savedPharmacy = pharmacyDao.save(newPharmacy);
+		 return savedPharmacy.toBeanDto();
 	}
 
 	@Override

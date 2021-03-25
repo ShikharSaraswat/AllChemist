@@ -46,9 +46,11 @@ public class PharmacyController {
 		}
 		
 		@PutMapping("/update_pharmacy")
-		public ResponseEntity<Pharmacy> updatePharmacy(@RequestBody PharmacyDto pharmacy){
+		public ResponseEntity<PharmacyDto> updatePharmacy(@RequestBody PharmacyDto pharmacy){
 			
-			Pharmacy updatedPharmacy = pharmacyService.updatePharmacyDetails(pharmacy);
+			PharmacyDto updatedPharmacy = pharmacyService.updatePharmacyDetails(pharmacy);
+			
 			return ResponseEntity.ok(updatedPharmacy);
 		}
+		
 }
