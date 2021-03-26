@@ -25,7 +25,7 @@ public class PatientServiceImpl implements IPatientService {
 	@Override
 	public PatientEntity getPatientByIdAndPassword(int id, String password) {
 
-		Optional<PatientEntity> opt = dao.findByIdAndPassword(id, password);
+		Optional<PatientEntity> opt = dao.findByIdAndPassword(id, password);  // Fetching patient by ID
 		return opt.orElseThrow(() -> new PatientDetailsHandlingException("Invalid Credentials"));
 	}
 
@@ -38,14 +38,14 @@ public class PatientServiceImpl implements IPatientService {
 	public PatientDto updatePatientDetails(PatientDto patient) {
 
 		System.out.println(patient.getId());
-		PatientEntity patientEntity = dao.findById(patient.getId())
+		PatientEntity patientEntity = dao.findById(patient.getId())  // Fetching patient by ID
 				.orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
 		System.out.println(patientEntity + " existing Patient");
 		patientEntity.setDetails(patient);
 //	BeanUtils.copyProperties(patient, patientEntity);
-		patientEntity = dao.save(patientEntity);
+		patientEntity = dao.save(patientEntity);  // saving Patient in entity table
 		System.out.println(patientEntity);
-		return patientEntity.toBean();
+		return patientEntity.toBean();   // Converting to DTO
 
 	}
 
@@ -60,15 +60,15 @@ public class PatientServiceImpl implements IPatientService {
 	public PatientEntity findPatientById(int id) {
 
 		return dao.findById(id)
-				.orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
+				.orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist")); // fetching patiennt by ID
 	}
 
 	@Override
 	public List<Prescription> fetchHistory(int id) {
-		PatientEntity patient = dao.findById(id)
+		PatientEntity patient = dao.findById(id)  // Fetching patient by ID
 				.orElseThrow(() -> new PatientDetailsHandlingException("Patient with given id does not exist"));
 		System.out.println(patient.getHistory());
-		HistoryDto history = new HistoryDto(patient.getHistory());
+		HistoryDto history = new HistoryDto(patient.getHistory());   // Setting History DTO
 
 		return history.getHistory();
 	}

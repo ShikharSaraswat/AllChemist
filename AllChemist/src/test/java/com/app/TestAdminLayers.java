@@ -21,7 +21,7 @@ public class TestAdminLayers {
 	@Autowired
 	private IAdminService adminService;
 	private HospitalDto hospital = new HospitalDto(4, "kshitij@gmail.com", "kshitij", "kshitij");
-	private PharmacyDto pharmacy = new PharmacyDto("meme", "meme@gmail.com", "meme", "meme");
+	private PharmacyDto pharmacy = new PharmacyDto("meme", "meme@gmail.com", "meme", "meme",1);
 
 	@Test
 	public void testRegisterHospital() {

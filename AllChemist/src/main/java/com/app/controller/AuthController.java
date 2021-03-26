@@ -39,13 +39,16 @@ public class AuthController {
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 		
 		
-
+		//fetching authentication object from auth manager
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 		
+		//setting authentication object in security context
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		//generating JWT
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
+		//fetching authenticated logged in user from authentication object  and encoding jwt
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())

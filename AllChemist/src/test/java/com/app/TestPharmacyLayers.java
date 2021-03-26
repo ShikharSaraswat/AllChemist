@@ -18,7 +18,7 @@ public class TestPharmacyLayers {
 	private IPharmacyService pharmacyService;
 	
 	Pharmacy pharma = new Pharmacy();
-	PharmacyDto setPharmacy =new PharmacyDto("med", "med@gmail.com", "med1234", "m1234");
+	PharmacyDto setPharmacy =new PharmacyDto("med", "med@gmail.com", "med1234", "m1234",1);
 	
 	@Test
 	public void testUpdatePharmacy() {

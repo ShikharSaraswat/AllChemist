@@ -16,12 +16,13 @@ public class PharmacyDto {
 	}
 	
 	//Parameterized constr
-	public PharmacyDto(String pharmacyName,String email, String licenseNumber, String password) {
+	public PharmacyDto(String pharmacyName,String email, String licenseNumber, String password,int id) {
 		super();
 		this.email=email;
 		this.pharmacyName = pharmacyName;
 		this.licenseNumber = licenseNumber;
 		this.password = password;
+		this.id=id;
 	}
 	
 	//Getters and Setters

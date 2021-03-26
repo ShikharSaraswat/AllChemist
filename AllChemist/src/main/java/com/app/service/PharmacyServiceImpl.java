@@ -28,14 +28,14 @@ public class PharmacyServiceImpl implements IPharmacyService {
 
 	@Override
 	public List<Prescription> checkPrescription(int id) {
-		PatientEntity patient = patientDao.findById(id)
+		PatientEntity patient = patientDao.findById(id)  // fetch patient by ID
 				.orElseThrow(() -> new PharmacyDetailsHandlingException("Patient id invalid"));
-		List<Prescription> history = patient.getHistory();
+		List<Prescription> history = patient.getHistory();   // Fetching history from patient
 		List<Prescription> validPrescriptions = new ArrayList<>();
 		// Prescription p = history.get(history.size() - 1);
 		history.forEach((p) -> {
 			if (p.isStatus() == true) {
-				validPrescriptions.add(p);
+				validPrescriptions.add(p);   // iterating the list to return valid prescriptions only
 			}
 		});
 		return validPrescriptions;
@@ -44,14 +44,14 @@ public class PharmacyServiceImpl implements IPharmacyService {
 
 	@Override
 	public String invalidatePrescription(int id, int imageId) {
-		PatientEntity patient = patientDao.findById(id)
+		PatientEntity patient = patientDao.findById(id)  // Fetching patient by ID
 				.orElseThrow(() -> new PharmacyDetailsHandlingException("Patient id invalid"));
-		List<Prescription> history = patient.getHistory();
+		List<Prescription> history = patient.getHistory();  // Fetching history of prescription from patient
 
 		// Prescription p = history.get(history.size() - 1);
 		history.forEach((p) -> {
 			if (p.getImageId() == imageId) {
-				p.setStatus(false);
+				p.setStatus(false);  // iterating through the list to invalidate a specific prescription with given ID
 			}
 		});
 //		if (p.isStatus() == true) {
@@ -68,9 +68,9 @@ public class PharmacyServiceImpl implements IPharmacyService {
 	public PharmacyDto updatePharmacyDetails(PharmacyDto pharmacy) {
 
 		Pharmacy updatedPharmacy = new Pharmacy();
-		updatedPharmacy.toBean(pharmacy);
-	Pharmacy savedPharmacy = pharmacyDao.save(updatedPharmacy);
-	return  savedPharmacy.toBeanDto();
+		updatedPharmacy.toBean(pharmacy);   // converting to Entity
+	Pharmacy savedPharmacy = pharmacyDao.save(updatedPharmacy);  //Save or update in entity table to update details
+	return  savedPharmacy.toBeanDto();  // Converting to DTO
 		
 	}
 

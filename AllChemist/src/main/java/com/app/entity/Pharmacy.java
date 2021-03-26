@@ -27,6 +27,7 @@ public class Pharmacy {
 		this.pharmacyName = pharmacyName;
 		this.licenseNumber = licenseNumber;
 		this.password = password;
+		
 	}
 
 	// setters and getters
@@ -88,7 +89,7 @@ public class Pharmacy {
 	}
 	
 	public PharmacyDto toBeanDto() {
-		PharmacyDto p = new PharmacyDto(this.getPharmacyName(), this.getEmail(), this.getLicenseNumber(), this.getPassword());
+		PharmacyDto p = new PharmacyDto(this.getPharmacyName(), this.getEmail(), this.getLicenseNumber(), this.getPassword(), this.getId());
 		return p;
 		
 	}

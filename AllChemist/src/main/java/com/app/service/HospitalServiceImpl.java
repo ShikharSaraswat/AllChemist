@@ -48,11 +48,11 @@ public class HospitalServiceImpl implements IHospitalService {
 	@Override
 	public void createPrescription(PrescriptionDto prescription) {
 		PatientEntity p = patientDao.findById(prescription.getPatientId())
-				.orElseThrow(() -> new PatientDetailsHandlingException("Patient id invalid"));
+				.orElseThrow(() -> new PatientDetailsHandlingException("Patient id invalid"));  // fetching patientt with id
 		System.out.println(p);
-		Prescription newPrescription = new Prescription(prescription);
+		Prescription newPrescription = new Prescription(prescription); // creating a new prescription
 		newPrescription.setPatientId(p);
-		prescriptionService.savePrescription(newPrescription);
+		prescriptionService.savePrescription(newPrescription);  // saving prescription in entity table
 
 
 
@@ -60,11 +60,12 @@ public class HospitalServiceImpl implements IHospitalService {
 
 	@Override
 	public List<Prescription> fetchHistory(int id) {
-		PatientEntity patient = patientDao.findById(id)
+		PatientEntity patient = patientDao.findById(id)  // fetching patient from patient entity using id
 				.orElseThrow(() -> new PatientDetailsHandlingException("Patient id invalid"));
-		HistoryDto history = new HistoryDto(patient.getHistory());
-		System.out.println(history.getHistory());
-		return history.getHistory();
+		HistoryDto history = new HistoryDto(patient.getHistory()); // creating history DTO for transmission
+		history.getHistory().forEach(System.out::println);
+		//System.out.println(history.getHistory());
+		return history.getHistory();  
 	}
 
 	@Override
@@ -85,10 +86,10 @@ public class HospitalServiceImpl implements IHospitalService {
 
 	@Override
 	public HospitalDto updateHospitalDetails(HospitalDto hospital) {
-		Hospital newHospital = new Hospital();
+		Hospital newHospital = new Hospital();   // creating hospital Entity from DTO
 		newHospital.toBean(hospital);
 
-		 Hospital savedHospital = hospitalDao.save(newHospital);
+		 Hospital savedHospital = hospitalDao.save(newHospital);  // saving hospital in Hospital Entity
 		 return savedHospital.toBeanDto();
 		 
 	}

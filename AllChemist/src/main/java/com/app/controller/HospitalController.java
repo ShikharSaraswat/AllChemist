@@ -35,7 +35,7 @@ public class HospitalController {
 		hospitalService.createPrescription(prescription);
 		return ResponseEntity.ok(new String("Prescription Added successfully"));
 	}
-	
+
 	@GetMapping("/get_history/{id}")
 	public ResponseEntity<List<Prescription>> viewHistory(@PathVariable int id){
 		//List<Prescription> list = hospitalService.fetchHistory(id);
